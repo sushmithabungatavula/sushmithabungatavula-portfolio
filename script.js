@@ -1,10 +1,15 @@
 const navToggle = document.querySelector(".nav-toggle");
 const siteNav = document.querySelector(".site-nav");
+const themeToggle = document.querySelector(".theme-toggle");
+const body = document.body;
 const navLinks = siteNav ? Array.from(siteNav.querySelectorAll('a[href^="#"]')) : [];
-const floatingCards = document.querySelectorAll(".glass-card");
-const revealItems = document.querySelectorAll(".reveal");
-const internalLinks = document.querySelectorAll('a[href^="#"]');
-const skillTrack = document.querySelector(".skill-track");
+const sections = navLinks
+  .map((link) => {
+    const href = link.getAttribute("href");
+    const target = href ? document.querySelector(href) : null;
+    return target ? { link, target } : null;
+  })
+  .filter(Boolean);
 
 if (navToggle && siteNav) {
   navToggle.addEventListener("click", () => {
@@ -20,206 +25,258 @@ if (navToggle && siteNav) {
   });
 }
 
-const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const savedTheme = window.localStorage.getItem("portfolio-theme");
+if (savedTheme === "light" || savedTheme === "dark") {
+  body.dataset.theme = savedTheme;
+}
 
-floatingCards.forEach((card, index) => {
-  card.dataset.depth = String((index % 3) + 1);
-});
-
-if (!prefersReducedMotion) {
-  window.addEventListener("pointermove", (event) => {
-    const offsetX = event.clientX / window.innerWidth - 0.5;
-    const offsetY = event.clientY / window.innerHeight - 0.5;
-
-    floatingCards.forEach((card) => {
-      const depth = Number(card.dataset.depth || 1);
-      card.style.setProperty("--parallax-x", `${offsetX * depth * 24}px`);
-      card.style.setProperty("--parallax-y", `${offsetY * depth * 24}px`);
-    });
+if (themeToggle) {
+  themeToggle.addEventListener("click", () => {
+    const nextTheme = body.dataset.theme === "light" ? "dark" : "light";
+    body.dataset.theme = nextTheme;
+    window.localStorage.setItem("portfolio-theme", nextTheme);
   });
 }
 
-if ("IntersectionObserver" in window) {
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.2 }
-  );
-
-  revealItems.forEach((item) => observer.observe(item));
-} else {
-  revealItems.forEach((item) => item.classList.add("is-visible"));
-}
-
-if (revealItems[0]) {
-  revealItems[0].classList.add("is-visible");
-}
-
-if (skillTrack) {
-  skillTrack.innerHTML += skillTrack.innerHTML;
-}
-
-const sectionTargets = navLinks
-  .map((link) => {
-    const href = link.getAttribute("href");
-    if (!href) return null;
-    const target = document.querySelector(href);
-    return target ? { link, target } : null;
-  })
-  .filter(Boolean);
-
-const setActiveNavLink = (id) => {
+const setActiveLink = (id) => {
   navLinks.forEach((link) => {
     link.classList.toggle("is-active", link.getAttribute("href") === `#${id}`);
   });
 };
 
-if (sectionTargets.length) {
-  setActiveNavLink("top");
-
-  const navObserver = new IntersectionObserver(
-    (entries) => {
-      const visibleEntries = entries
-        .filter((entry) => entry.isIntersecting)
-        .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-
-      if (!visibleEntries.length) {
-        return;
-      }
-
-      setActiveNavLink(visibleEntries[0].target.id);
-    },
-    {
-      rootMargin: "-25% 0px -55% 0px",
-      threshold: [0.2, 0.35, 0.5, 0.7],
-    }
-  );
-
-  sectionTargets.forEach(({ target }) => navObserver.observe(target));
-}
-
-internalLinks.forEach((link) => {
+navLinks.forEach((link) => {
   link.addEventListener("click", (event) => {
-    const targetId = link.getAttribute("href");
-    if (!targetId || targetId === "#") {
-      return;
-    }
-
-    const target = document.querySelector(targetId);
-    if (!target) {
-      return;
-    }
+    const href = link.getAttribute("href");
+    const target = href ? document.querySelector(href) : null;
+    if (!target) return;
 
     event.preventDefault();
-    setActiveNavLink(target.id);
-
-    const headerOffset = siteNav ? document.querySelector(".site-header")?.offsetHeight || 0 : 0;
-    const targetTop = window.scrollY + target.getBoundingClientRect().top - headerOffset - 18;
+    const headerHeight = document.querySelector(".site-header")?.offsetHeight || 0;
+    const top = window.scrollY + target.getBoundingClientRect().top - headerHeight - 14;
 
     window.scrollTo({
-      top: Math.max(targetTop, 0),
-      behavior: prefersReducedMotion ? "auto" : "smooth",
+      top: Math.max(top, 0),
+      behavior: "smooth",
     });
   });
 });
 
-const canvas = document.querySelector(".noise-canvas");
+if (sections.length && "IntersectionObserver" in window) {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      const visible = entries
+        .filter((entry) => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
 
-if (canvas && !prefersReducedMotion) {
-  const context = canvas.getContext("2d");
-  const pointer = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
-  let animationFrame = 0;
+      if (!visible.length) return;
+      setActiveLink(visible[0].target.id);
+    },
+    {
+      rootMargin: "-16% 0px -52% 0px",
+      threshold: [0.2, 0.35, 0.5],
+    }
+  );
+
+  sections.forEach(({ target }) => observer.observe(target));
+}
+
+const revealItems = Array.from(document.querySelectorAll("[data-reveal]"));
+
+if (revealItems.length && "IntersectionObserver" in window) {
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-visible");
+        revealObserver.unobserve(entry.target);
+      });
+    },
+    {
+      threshold: 0.16,
+      rootMargin: "0px 0px -8% 0px",
+    }
+  );
+
+  revealItems.forEach((item, index) => {
+    item.style.transitionDelay = `${Math.min(index % 5, 4) * 75}ms`;
+    revealObserver.observe(item);
+  });
+} else {
+  revealItems.forEach((item) => item.classList.add("is-visible"));
+}
+
+const contactForm = document.querySelector(".contact-form");
+const cursorGlow = document.querySelector(".cursor-glow");
+
+if (contactForm) {
+  const status = contactForm.querySelector(".form-status");
+  contactForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const formData = new FormData(contactForm);
+    const name = String(formData.get("name") || "").trim();
+    const email = String(formData.get("email") || "").trim();
+    const message = String(formData.get("message") || "").trim();
+
+    if (!name || !email || !message) {
+      if (status) status.textContent = "Please fill out all fields before sending.";
+      return;
+    }
+
+    const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    if (!emailValid) {
+      if (status) status.textContent = "Please enter a valid email address.";
+      return;
+    }
+
+    const subject = encodeURIComponent(`Portfolio inquiry from ${name || "Website visitor"}`);
+    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
+
+    if (status) status.textContent = "Opening your mail app with the message ready to send.";
+    window.location.href = `mailto:sushmithabungatavula07@gmail.com?subject=${subject}&body=${body}`;
+  });
+}
+
+if (cursorGlow && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  window.addEventListener("pointermove", (event) => {
+    cursorGlow.style.opacity = "1";
+    cursorGlow.style.transform = `translate(${event.clientX - cursorGlow.offsetWidth / 2}px, ${event.clientY - cursorGlow.offsetHeight / 2}px)`;
+  });
+
+  window.addEventListener("pointerleave", () => {
+    cursorGlow.style.opacity = "0";
+  });
+}
+
+const canvas = document.querySelector(".background-canvas");
+
+if (canvas) {
+  const ctx = canvas.getContext("2d");
+  const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+  let width = 0;
+  let height = 0;
   let particles = [];
+  let animationFrame = 0;
+  let pointer = { x: 0, y: 0, active: false };
 
-  const palette = [
-    "69, 240, 255",
-    "255, 79, 216",
-    "255, 176, 0",
-    "214, 255, 73",
-  ];
+  const getThemeStyles = () => {
+    const computed = getComputedStyle(body);
+    return {
+      particle: computed.getPropertyValue("--particle").trim() || "rgba(138, 190, 255, 0.42)",
+      line: computed.getPropertyValue("--particle-line").trim() || "rgba(108, 167, 255, 0.14)",
+    };
+  };
 
-  const resizeCanvas = () => {
-    canvas.width = window.innerWidth * window.devicePixelRatio;
-    canvas.height = window.innerHeight * window.devicePixelRatio;
-    canvas.style.width = `${window.innerWidth}px`;
-    canvas.style.height = `${window.innerHeight}px`;
-    context.setTransform(window.devicePixelRatio, 0, 0, window.devicePixelRatio, 0, 0);
-
-    particles = Array.from({ length: Math.min(65, Math.floor(window.innerWidth / 20)) }, () => ({
-      x: Math.random() * window.innerWidth,
-      y: Math.random() * window.innerHeight,
-      vx: (Math.random() - 0.5) * 0.45,
-      vy: (Math.random() - 0.5) * 0.45,
-      size: Math.random() * 2.6 + 0.8,
-      color: palette[Math.floor(Math.random() * palette.length)],
+  const createParticles = () => {
+    const count = Math.max(36, Math.floor((width * height) / 34000));
+    particles = Array.from({ length: count }, () => ({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      vx: (Math.random() - 0.5) * 0.18,
+      vy: (Math.random() - 0.5) * 0.18,
+      size: Math.random() * 1.8 + 0.8,
     }));
   };
 
-  const drawFrame = () => {
-    context.clearRect(0, 0, window.innerWidth, window.innerHeight);
+  const resize = () => {
+    width = window.innerWidth;
+    height = window.innerHeight;
+    canvas.width = width * window.devicePixelRatio;
+    canvas.height = height * window.devicePixelRatio;
+    canvas.style.width = `${width}px`;
+    canvas.style.height = `${height}px`;
+    ctx.setTransform(window.devicePixelRatio, 0, 0, window.devicePixelRatio, 0, 0);
+    createParticles();
+  };
+
+  const draw = () => {
+    ctx.clearRect(0, 0, width, height);
+    const themeStyles = getThemeStyles();
 
     particles.forEach((particle, index) => {
       particle.x += particle.vx;
       particle.y += particle.vy;
 
-      if (particle.x < -40) particle.x = window.innerWidth + 40;
-      if (particle.x > window.innerWidth + 40) particle.x = -40;
-      if (particle.y < -40) particle.y = window.innerHeight + 40;
-      if (particle.y > window.innerHeight + 40) particle.y = -40;
+      if (particle.x < -20) particle.x = width + 20;
+      if (particle.x > width + 20) particle.x = -20;
+      if (particle.y < -20) particle.y = height + 20;
+      if (particle.y > height + 20) particle.y = -20;
 
-      const dx = pointer.x - particle.x;
-      const dy = pointer.y - particle.y;
-      const distance = Math.hypot(dx, dy);
+      ctx.beginPath();
+      ctx.fillStyle = themeStyles.particle;
+      ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+      ctx.fill();
 
-      context.beginPath();
-      context.fillStyle = `rgba(${particle.color}, 0.85)`;
-      context.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-      context.fill();
+      for (let i = index + 1; i < particles.length; i += 1) {
+        const other = particles[i];
+        const dx = particle.x - other.x;
+        const dy = particle.y - other.y;
+        const distance = Math.hypot(dx, dy);
 
-      if (distance < 160) {
-        context.beginPath();
-        context.strokeStyle = `rgba(${particle.color}, ${0.18 - distance / 1000})`;
-        context.lineWidth = 1;
-        context.moveTo(particle.x, particle.y);
-        context.lineTo(pointer.x, pointer.y);
-        context.stroke();
+        if (distance < 160) {
+          const opacity = 1 - distance / 160;
+          ctx.beginPath();
+          const lineColor = themeStyles.line;
+          const alpha = opacity * 0.8;
+          ctx.strokeStyle = lineColor.replace(/rgba?\(([^)]+)\)/, (match, values) => {
+            const parts = values.split(",").map((part) => part.trim());
+            if (parts.length >= 3) {
+              return `rgba(${parts[0]}, ${parts[1]}, ${parts[2]}, ${alpha})`;
+            }
+            return match;
+          });
+          ctx.lineWidth = 1;
+          ctx.moveTo(particle.x, particle.y);
+          ctx.lineTo(other.x, other.y);
+          ctx.stroke();
+        }
       }
 
-      const next = particles[index + 1];
-      if (next) {
-        const neighborDistance = Math.hypot(next.x - particle.x, next.y - particle.y);
-        if (neighborDistance < 130) {
-          context.beginPath();
-          context.strokeStyle = `rgba(255, 255, 255, ${0.12 - neighborDistance / 1400})`;
-          context.moveTo(particle.x, particle.y);
-          context.lineTo(next.x, next.y);
-          context.stroke();
+      if (pointer.active) {
+        const dx = particle.x - pointer.x;
+        const dy = particle.y - pointer.y;
+        const distance = Math.hypot(dx, dy);
+
+        if (distance < 180) {
+          const force = (1 - distance / 180) * 0.018;
+          particle.vx += dx * force * 0.002;
+          particle.vy += dy * force * 0.002;
         }
       }
     });
 
-    animationFrame = window.requestAnimationFrame(drawFrame);
+    animationFrame = window.requestAnimationFrame(draw);
   };
 
-  window.addEventListener("pointermove", (event) => {
-    pointer.x = event.clientX;
-    pointer.y = event.clientY;
-  });
-
-  window.addEventListener("resize", resizeCanvas);
-
-  resizeCanvas();
-  drawFrame();
-
-  window.addEventListener("beforeunload", () => {
+  const start = () => {
+    if (mediaQuery.matches) return;
     window.cancelAnimationFrame(animationFrame);
+    draw();
+  };
+
+  window.addEventListener("resize", () => {
+    resize();
+    start();
   });
-} else {
-  document.documentElement.classList.add("reduced-motion");
+
+  window.addEventListener("pointermove", (event) => {
+    pointer = { x: event.clientX, y: event.clientY, active: true };
+  });
+
+  window.addEventListener("pointerleave", () => {
+    pointer.active = false;
+  });
+
+  mediaQuery.addEventListener("change", () => {
+    if (mediaQuery.matches) {
+      window.cancelAnimationFrame(animationFrame);
+      ctx.clearRect(0, 0, width, height);
+      return;
+    }
+    resize();
+    start();
+  });
+
+  resize();
+  start();
 }
