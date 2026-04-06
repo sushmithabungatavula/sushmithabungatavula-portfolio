@@ -10,10 +10,7 @@
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body data-theme="dark">
@@ -34,6 +31,8 @@
           <a href="#home">Home</a>
           <a href="#projects">Projects</a>
           <a href="#experience">Experience</a>
+          <a href="#skills">Skills</a>
+          <a href="#personal-achievements">Leadership</a>
           <a href="#contact">Contact</a>
         </nav>
         <button class="theme-toggle" type="button" aria-label="Toggle color theme">
@@ -49,11 +48,25 @@
     <main class="page-shell">
       <section class="hero section" id="home">
         <div class="hero-copy" data-reveal="up">
-          <h1>
-            Hi, I am <span class="hero-name">Sushmitha</span> <span class="wave">👋</span>
+          <h1 class="hero-heading">
+            Hi, I’m <span class="hero-name gradient-name">Sushmitha</span>
+            <span class="wave">👋</span>
           </h1>
           <p class="hero-subtitle">
-            I build scalable products, interactive data experiences, and reliable backend systems.
+            I’m a Full-Stack Software Engineer with ~3 years of experience building production-grade applications.
+          </p>
+          <p class="hero-highlight">
+            I build
+            <span class="changing-text">
+              <span class="word active">scalable systems</span>
+              <span class="word">real-time applications</span>
+              <span class="word">reliable backend services</span>
+            </span>
+          </p>
+          <p class="hero-kicker-line">
+            <span>📍 Texas, USA</span>
+            <span>|</span>
+            <span>Open to Full-Time Software Engineer roles</span>
           </p>
 
           <div class="hero-meta">
@@ -108,146 +121,49 @@
         </div>
       </section>
 
-      <section class="skills-section section" id="skills">
-        <div class="section-head" data-reveal="up">
-          <span class="eyebrow">Skills</span>
-          <h2>Tech stack behind my work</h2>
-          <p>Tools I use to build scalable products, interactive UIs, and reliable backend systems.</p>
-        </div>
-
-        <div class="skills-ribbon-shell panel" data-reveal="up">
-          <div class="skills-ribbon">
-            <div class="skills-track">
-              <span>React</span>
-              <span>JavaScript</span>
-              <span>TypeScript</span>
-              <span>Python</span>
-              <span>C#</span>
-              <span>.NET</span>
-              <span>Node.js</span>
-              <span>PostgreSQL</span>
-              <span>MySQL</span>
-              <span>Git</span>
-              <span>Azure DevOps</span>
-              <span>D3.js</span>
-              <span>Three.js</span>
-              <span>Redux</span>
-              <span>REST APIs</span>
-            </div>
-            <div class="skills-track" aria-hidden="true">
-              <span>React</span>
-              <span>JavaScript</span>
-              <span>TypeScript</span>
-              <span>Python</span>
-              <span>C#</span>
-              <span>.NET</span>
-              <span>Node.js</span>
-              <span>PostgreSQL</span>
-              <span>MySQL</span>
-              <span>Git</span>
-              <span>Azure DevOps</span>
-              <span>D3.js</span>
-              <span>Three.js</span>
-              <span>Redux</span>
-              <span>REST APIs</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="skills-grid">
-          <article class="panel skill-card" data-reveal="left">
-            <h3>Frontend</h3>
-            <p>Build responsive, high-performance interfaces with React, TypeScript, and reusable component systems.</p>
-          </article>
-          <article class="panel skill-card" data-reveal="up">
-            <h3>Backend</h3>
-            <p>Develop structured APIs, services, and application logic with .NET, Node.js, and Python.</p>
-          </article>
-          <article class="panel skill-card" data-reveal="right">
-            <h3>Data & Delivery</h3>
-            <p>Work with SQL, Git, DevOps workflows, and deployment pipelines to keep products reliable.</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="experience-section section" id="experience">
-        <div class="section-head" data-reveal="up">
-          <span class="eyebrow">Experience</span>
-          <h2>Work that shipped and scaled</h2>
-          <p>Enterprise product development across full-stack delivery, modernization, and reliability.</p>
-        </div>
-
-        <div class="experience-list">
-          <article class="panel experience-card" data-reveal="left">
-            <div class="experience-top">
-              <img class="company-logo" src="./DXC-Logo-2025.svg.png" alt="DXC Technology logo" />
-              <div>
-                <h3>DXC Technology</h3>
-                <p>Software Engineer</p>
-                <span>Nov 2021 - Jul 2024</span>
-              </div>
-            </div>
-            <ul class="statement-list">
-              <li>Built a real-time UAV ground control system using .NET and PostgreSQL, supporting geospatial telemetry workflows in a production system linked to ~$400K business impact.</li>
-              <li>Modernized legacy systems with cleaner architecture, CI/CD workflows, and stronger application reliability.</li>
-            </ul>
-          </article>
-
-          <article class="panel experience-card" data-reveal="right">
-            <div class="experience-top">
-              <img class="company-logo" src="./hackboats.png" alt="HackBoats logo" />
-              <div>
-                <h3>HackBoats, Inc.</h3>
-                <p>Full-Stack Software Development Intern</p>
-                <span>Jun 2019 - Jul 2019</span>
-              </div>
-            </div>
-            <ul class="statement-list">
-              <li>Developed responsive web interfaces using HTML, CSS, and JavaScript for faster product delivery.</li>
-              <li>Improved frontend performance and component reuse across devices for smoother iteration.</li>
-            </ul>
-          </article>
-        </div>
-      </section>
-
       <section class="projects-section section" id="projects">
         <div class="section-head" data-reveal="up">
-          <span class="eyebrow">Projects</span>
-          <h2>Projects that solved real problems</h2>
-          <p>Each build focused on clear product outcomes, strong UX, and practical engineering.</p>
+          <h2>Projects</h2>
+          <p>Real-world applications focused on performance, scalability, and user experience.</p>
         </div>
 
         <div class="projects-stack">
-          <div class="project-group-head" data-reveal="up">
-            <h3>My Work</h3>
-            <p>Client-facing product work and live platforms.</p>
-          </div>
-
           <article class="panel project-feature-row" data-reveal="up">
             <div class="project-feature-copy">
-              <h3>Bharat Harvest</h3>
+              <h3>Bharat Harvest | Agri-tech Platform</h3>
               <p class="project-feature-description">
-                Built a responsive agri-tech platform that unified fragmented farming workflows across product discovery, pricing, and content access. Integrated multiple APIs and asynchronous data flows to improve responsiveness and reduce fetch latency by about 30%.
+                Developed a full-stack agri-tech platform integrating multiple REST APIs for product, pricing, and content data, enabling real-time rendering and reducing data fetch latency by ~30%.
+              </p>
+              <p class="project-feature-description">
+                Engineered modular frontend components with asynchronous data handling, reducing page load time by ~25% and accelerating feature delivery by ~20%.
               </p>
               <div class="tag-row">
                 <span>React</span>
-                <span>Next.js</span>
+                <span>REST APIs</span>
                 <span>Node.js</span>
                 <span>MongoDB</span>
               </div>
               <div class="project-links">
-                <a href="https://www.bharat-harvest.com/" target="_blank" rel="noreferrer">Live</a>
-                <a href="https://github.com/sushmithabungatavula" target="_blank" rel="noreferrer">GitHub</a>
+                <a href="https://www.bharat-harvest.com/" target="_blank" rel="noreferrer">
+                  <img src="./icons/vercel.svg" alt="" />
+                  <span>Live</span>
+                </a>
+                <a href="https://github.com/sushmithabungatavula" target="_blank" rel="noreferrer">
+                  <img src="./icons/github.svg" alt="" />
+                  <span>GitHub</span>
+                </a>
               </div>
             </div>
             <div class="project-feature-media">
-              <img src="./bharath harvest.png" alt="Bharat Harvest preview" />
+              <video src="./bharathharvestvedio-small.mp4" autoplay muted loop playsinline preload="metadata" poster="./bharath harvest.png" aria-label="Bharat Harvest demo preview">
+                <img src="./bharath harvest.png" alt="Bharat Harvest preview" />
+              </video>
             </div>
           </article>
 
           <article class="panel project-feature-row project-feature-row-reverse" data-reveal="up">
             <div class="project-feature-copy">
-              <h3>Farmbox</h3>
+              <h3>Farmbox | E-commerce Experience</h3>
               <p class="project-feature-description">
                 Built a clean product website that made fresh-produce ordering easier to understand and navigate. The work focused on stronger content hierarchy, responsive shopping flows, and a clearer digital storefront experience.
               </p>
@@ -258,23 +174,26 @@
                 <span>Responsive UI</span>
               </div>
               <div class="project-links">
-                <a href="https://www.farmbox.in/" target="_blank" rel="noreferrer">Live</a>
-                <a href="https://github.com/sushmithabungatavula" target="_blank" rel="noreferrer">GitHub</a>
+                <a href="https://www.farmbox.in/" target="_blank" rel="noreferrer">
+                  <img src="./icons/vercel.svg" alt="" />
+                  <span>Live</span>
+                </a>
+                <a href="https://github.com/sushmithabungatavula" target="_blank" rel="noreferrer">
+                  <img src="./icons/github.svg" alt="" />
+                  <span>GitHub</span>
+                </a>
               </div>
             </div>
             <div class="project-feature-media">
-              <img src="./farmbox.png" alt="Farmbox preview" />
+              <video src="./farmboxvedio-small.mp4" autoplay muted loop playsinline preload="metadata" poster="./farmbox.png" aria-label="Farmbox demo preview">
+                <img src="./farmbox.png" alt="Farmbox preview" />
+              </video>
             </div>
           </article>
 
-          <div class="project-group-head" data-reveal="up">
-            <h3>Projects</h3>
-            <p>Personal builds focused on engineering depth, data, and interactive UX.</p>
-          </div>
-
           <article class="panel project-feature-row project-feature-row-reverse" data-reveal="up">
             <div class="project-feature-copy">
-              <h3>Accessibility Resource Hub</h3>
+              <h3>Accessibility Resource Hub | Inclusive Web Platform</h3>
               <p class="project-feature-description">
                 Created a centralized accessibility platform for discovering tools, practical guidance, and community support in one place. The product focused on usability, WCAG-aware testing, and making inclusive digital experiences easier to access and understand.
               </p>
@@ -284,12 +203,18 @@
                 <span>Firebase</span>
               </div>
               <div class="project-links">
-                <a href="https://arhub-f7416.web.app/" target="_blank" rel="noreferrer">Live</a>
-                <a href="https://github.com/sushmithabungatavula/ARHUB" target="_blank" rel="noreferrer">GitHub</a>
+                <a href="https://arhub-f7416.web.app/" target="_blank" rel="noreferrer">
+                  <img src="./icons/vercel.svg" alt="" />
+                  <span>Live</span>
+                </a>
+                <a href="https://github.com/sushmithabungatavula/ARHUB" target="_blank" rel="noreferrer">
+                  <img src="./icons/github.svg" alt="" />
+                  <span>GitHub</span>
+                </a>
               </div>
             </div>
             <div class="project-feature-media">
-              <video src="./arhubvedio.mov" autoplay muted loop playsinline controls preload="metadata" poster="./arhub.png" aria-label="Accessibility Resource Hub demo preview">
+              <video src="./arhubvedio.mov" autoplay muted loop playsinline preload="metadata" poster="./arhub.png" aria-label="Accessibility Resource Hub demo preview">
                 <img src="./arhub.png" alt="Accessibility Resource Hub preview" />
               </video>
             </div>
@@ -297,22 +222,32 @@
 
           <article class="panel project-feature-row" data-reveal="up">
             <div class="project-feature-copy">
-              <h3>The Crowded Orbit</h3>
+              <h3>The Crowded Orbit | Data Visualization Platform</h3>
               <p class="project-feature-description">
-                Built an interactive data visualization platform to explore dense orbital datasets in a more intuitive way. The project improved readability and responsiveness while rendering 10K+ records with smoother 2D and 3D interactions.
+                Built a high-performance data visualization platform handling 10K+ records, optimizing DOM updates and rendering pipelines to reduce latency by ~40%.
+              </p>
+              <p class="project-feature-description">
+                Designed interactive 2D/3D visualizations using D3.js and Three.js, improving data interpretability and enabling intuitive exploration of satellite datasets.
               </p>
               <div class="tag-row">
                 <span>D3.js</span>
                 <span>Three.js</span>
                 <span>JavaScript</span>
+                <span>Data Visualization</span>
               </div>
               <div class="project-links">
-                <a href="https://thecrowdedorbit.vercel.app/index.html" target="_blank" rel="noreferrer">Live</a>
-                <a href="https://github.com/sushmithabungatavula" target="_blank" rel="noreferrer">GitHub</a>
+                <a href="https://thecrowdedorbit.vercel.app/index.html" target="_blank" rel="noreferrer">
+                  <img src="./icons/vercel.svg" alt="" />
+                  <span>Live</span>
+                </a>
+                <a href="https://github.com/sushmithabungatavula" target="_blank" rel="noreferrer">
+                  <img src="./icons/github.svg" alt="" />
+                  <span>GitHub</span>
+                </a>
               </div>
             </div>
             <div class="project-feature-media">
-              <video src="./crowdedvedio.mov" autoplay muted loop playsinline controls preload="metadata" poster="./crowded.png" aria-label="The Crowded Orbit demo preview">
+              <video src="./crowdedvedio.mov" autoplay muted loop playsinline preload="metadata" poster="./crowded.png" aria-label="The Crowded Orbit demo preview">
                 <img src="./crowded.png" alt="The Crowded Orbit preview" />
               </video>
             </div>
@@ -320,7 +255,7 @@
 
           <article class="panel project-feature-row" data-reveal="up">
             <div class="project-feature-copy">
-              <h3>Thrift Store System</h3>
+              <h3>Thrift Store System | Retail Workflow Platform</h3>
               <p class="project-feature-description">
                 Designed a full-stack retail workflow system to simplify inventory, payments, shipping, returns, and admin operations. The platform brought structure to second-hand retail management with cleaner customer flows and stronger operational control.
               </p>
@@ -331,11 +266,14 @@
                 <span>MySQL</span>
               </div>
               <div class="project-links">
-                <a href="https://github.com/sushmithabungatavula/ThriftStoreCustomer" target="_blank" rel="noreferrer">GitHub</a>
+                <a href="https://github.com/sushmithabungatavula/ThriftStoreCustomer" target="_blank" rel="noreferrer">
+                  <img src="./icons/github.svg" alt="" />
+                  <span>GitHub</span>
+                </a>
               </div>
             </div>
             <div class="project-feature-media">
-              <video src="./thriftstorevedio.mov" autoplay muted loop playsinline controls preload="metadata" poster="./thrift-store-system.svg" aria-label="Thrift Store System demo preview">
+              <video src="./thriftstorevedio.mov" autoplay muted loop playsinline preload="metadata" poster="./thrift-store-system.svg" aria-label="Thrift Store System demo preview">
                 <img src="./thrift-store-system.svg" alt="Thrift Store System preview" />
               </video>
             </div>
@@ -344,11 +282,163 @@
         </div>
       </section>
 
+      <section class="experience-section section" id="experience">
+        <div class="section-head" data-reveal="up">
+          <h2>Work Experience</h2>
+          <p>Industry experience delivering scalable systems, modernizing legacy platforms, and building production-ready applications.</p>
+        </div>
+
+        <div class="experience-timeline">
+          <article class="timeline-item experience-timeline-item" data-reveal="left">
+            <div class="timeline-marker experience-timeline-marker" aria-hidden="true"></div>
+            <div class="panel experience-card timeline-content">
+              <div class="experience-top">
+                <img class="company-logo" src="./DXC-Logo-2025.svg.png" alt="DXC Technology logo" />
+                <div>
+                  <span class="timeline-period">Nov 2021 - Jul 2024</span>
+                  <h3>Software Engineer</h3>
+                  <p>DXC Technology</p>
+                </div>
+              </div>
+              <ul class="statement-list">
+                <li>At DXC Technology, I worked on building and scaling production-grade applications, focusing on real-time systems, performance, and reliability.</li>
+                <li>I developed a real-time Ground Control Station (GCS) application for UAV tracking, handling live telemetry and geospatial data using .NET, C#, and PostgreSQL. Modernized a legacy system into a more scalable and maintainable architecture by introducing dependency injection, structured logging, and CI/CD workflows.</li>
+                <li>Alongside this, I built modular frontend components using React and TypeScript, improving development speed and overall system usability. My work focused on building systems that are fast, reliable, and ready for real-world deployment.</li>
+              </ul>
+            </div>
+          </article>
+          <article class="timeline-item experience-timeline-item" data-reveal="right">
+            <div class="timeline-marker experience-timeline-marker" aria-hidden="true"></div>
+            <div class="panel experience-card timeline-content">
+              <div class="experience-top">
+                <img class="company-logo" src="./hackboats.png" alt="HackBoats logo" />
+                <div>
+                  <span class="timeline-period">Jun 2019 - Jul 2019</span>
+                  <h3>Full-Stack Software Development Intern</h3>
+                  <p>HackBoats, Inc.</p>
+                </div>
+              </div>
+              <ul class="statement-list">
+                <li>Developed a production-grade web platform using HTML, CSS, and JavaScript, implementing dynamic UI components and client-side data handling to improve user engagement and lead capture.</li>
+                <li>Optimized front-end performance and scalability by building reusable, modular components, reducing page load time by ~25%, and ensuring cross-browser and multi-device compatibility.</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="skills-section section" id="skills">
+        <div class="section-head" data-reveal="up">
+          <h2>Technical Skills</h2>
+          <p>Technologies I use to build scalable applications, real-time systems, and data-driven products.</p>
+        </div>
+
+        <div class="skills-ribbon-shell panel" data-reveal="up">
+          <div class="skills-ribbon">
+            <div class="skills-track">
+              <span>React</span>
+              <span>TypeScript</span>
+              <span>JavaScript</span>
+              <span>C#</span>
+              <span>.NET</span>
+              <span>Node.js</span>
+              <span>PostgreSQL</span>
+              <span>MySQL</span>
+              <span>MongoDB</span>
+              <span>Python</span>
+              <span>REST APIs</span>
+              <span>D3.js</span>
+              <span>Three.js</span>
+              <span>Azure DevOps</span>
+              <span>Git</span>
+              <span>CI/CD</span>
+              <span>AWS</span>
+            </div>
+            <div class="skills-track" aria-hidden="true">
+              <span>React</span>
+              <span>TypeScript</span>
+              <span>JavaScript</span>
+              <span>C#</span>
+              <span>.NET</span>
+              <span>Node.js</span>
+              <span>PostgreSQL</span>
+              <span>MySQL</span>
+              <span>MongoDB</span>
+              <span>Python</span>
+              <span>REST APIs</span>
+              <span>D3.js</span>
+              <span>Three.js</span>
+              <span>Azure DevOps</span>
+              <span>Git</span>
+              <span>CI/CD</span>
+              <span>AWS</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="skills-grid">
+          <article class="panel skill-card" data-reveal="left">
+            <h3>Frontend</h3>
+            <p>Build high-performance, responsive user interfaces using React, TypeScript, and modern component architectures.</p>
+          </article>
+          <article class="panel skill-card" data-reveal="up">
+            <h3>Backend</h3>
+            <p>Develop scalable backend services and APIs using .NET, Node.js, and structured application design.</p>
+          </article>
+          <article class="panel skill-card" data-reveal="right">
+            <h3>Data & Delivery</h3>
+            <p>Work with SQL, cloud platforms, and CI/CD pipelines to ensure performance, reliability, and production scalability.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <article class="panel achievements-panel" id="personal-achievements" data-reveal="right">
+          <div class="section-head section-head-compact">
+            <h2>Leadership & Impact</h2>
+          </div>
+          <div class="timeline">
+            <article class="timeline-item">
+              <div class="timeline-marker" aria-hidden="true"></div>
+              <div class="timeline-content">
+                <div class="timeline-header">
+                  <img class="timeline-logo" src="./sweclogo.png" alt="Sridevi Women's Engineering College logo" />
+                  <div>
+                    <h3>Creative Head</h3>
+                    <span class="timeline-period">2018 - 2021</span>
+                  </div>
+                </div>
+                <p class="timeline-org">Sridevi Women's Engineering College</p>
+                <p class="timeline-description">
+                  Organized workshops and technical sessions for 2,000+ students, led planning and execution for 15+ campus-wide events, and coordinated student teams across schedules, documentation, and creative direction.
+                </p>
+              </div>
+            </article>
+
+            <article class="timeline-item">
+              <div class="timeline-marker" aria-hidden="true"></div>
+              <div class="timeline-content">
+                <div class="timeline-header">
+                  <img class="timeline-logo" src="./younifylogo.jpeg" alt="Younify logo" />
+                  <div>
+                    <h3>Head of Design Department</h3>
+                    <span class="timeline-period">2020 - 2021</span>
+                  </div>
+                </div>
+                <p class="timeline-org">Younify</p>
+                <p class="timeline-description">
+                  Led design and social media for SWEC Younify Campus Radio, created digital and print campaigns using Canva and Illustrator, and increased visibility and student participation across 10+ campus events.
+                </p>
+              </div>
+            </article>
+          </div>
+        </article>
+      </section>
+
       <section class="education-achievements section">
         <article class="panel education-panel" id="education" data-reveal="left">
           <div class="section-head section-head-compact">
-            <span class="eyebrow">Education</span>
-            <h2>Academic foundation</h2>
+            <h2>Education</h2>
           </div>
           <div class="education-entry">
             <img
@@ -357,102 +447,70 @@
               alt="University of North Texas logo"
             />
             <div>
-              <h3>University of North Texas</h3>
-              <p>Master of Science in Computer Science</p>
-              <span>2024 - 2026</span>
+              <h3>Master of Science in Computer Science</h3>
+              <p>University of North Texas</p>
+              <span>Aug 2024 - May 2026</span>
             </div>
           </div>
           <div class="certifications-block">
-            <h3>Certifications</h3>
+            <h3>Relevant Coursework</h3>
             <div class="tag-row">
-              <span>AWS Certified Cloud Practitioner (CLF-C02)</span>
-              <span>Microsoft Azure Fundamentals (AZ-900)</span>
+              <span>Data Structures</span>
+              <span>Algorithms</span>
+              <span>Machine Learning</span>
+              <span>Data Mining</span>
             </div>
           </div>
         </article>
 
-        <article class="panel achievements-panel" id="achievements" data-reveal="right">
+        <article class="panel achievements-panel" id="certifications" data-reveal="right">
           <div class="section-head section-head-compact">
-            <span class="eyebrow">Achievements</span>
-            <h2>Highlights</h2>
+            <h2>Certifications</h2>
           </div>
-          <div class="achievement-grid">
-            <div class="achievement-item">
-              <strong>$400K</strong>
-              <span>Revenue-linked delivery impact</span>
-            </div>
-            <div class="achievement-item">
-              <strong>10K+</strong>
-              <span>Records visualized interactively</span>
-            </div>
-            <div class="achievement-item">
-              <strong>25%</strong>
-              <span>Frontend performance improvement</span>
-            </div>
-            <div class="achievement-item">
-              <strong>99.36%</strong>
-              <span>ML classification accuracy achieved</span>
-            </div>
+          <div class="tag-row">
+            <span>AWS Certified Cloud Practitioner CLF-C02 (2024)</span>
+            <span>Microsoft Certified Azure Fundamentals (AZ-900) (2023)</span>
+            <span>ISTQB Certified Tester Foundation Level (CTFL) (2023)</span>
           </div>
         </article>
       </section>
 
       <section class="contact-section section" id="contact">
-        <div class="section-head" data-reveal="up">
-          <span class="eyebrow">Contact</span>
-          <h2>Let’s connect</h2>
-          <p>Reach out for roles, collaborations, projects, or simply to say hello.</p>
-        </div>
-
-        <div class="contact-layout">
-          <div class="panel contact-card" data-reveal="left">
-            <h3>Contact details</h3>
-            <div class="contact-list">
-              <a href="mailto:sushmithabungatavula07@gmail.com">
-                <img src="./icons/mail.svg" alt="" />
-                <span>sushmithabungatavula07@gmail.com</span>
+        <div class="panel contact-showcase" data-reveal="up">
+          <div class="contact-showcase-copy">
+            <h2>Get in touch</h2>
+            <div class="contact-copy-links">
+              <a class="contact-email-pill" href="mailto:sushmithabungatavula07@gmail.com">
+                sushmithabungatavula07@gmail.com
               </a>
-              <a
-                href="https://www.linkedin.com/in/sushmitha-bungatavula-664964173/"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <img src="./icons/linkedin.svg" alt="" />
-                <span>LinkedIn</span>
-              </a>
-              <a href="https://github.com/sushmithabungatavula" target="_blank" rel="noreferrer">
-                <img src="./icons/github.svg" alt="" />
-                <span>GitHub</span>
-              </a>
-              <a href="./Sushmitha.Bungatavula.pdf" target="_blank" rel="noreferrer">
+              <a class="contact-resume-link" href="./Sushmitha.Bungatavula.pdf" target="_blank" rel="noreferrer">
                 <img src="./icons/resume.svg" alt="" />
-                <span>Resume</span>
+                <span>View Resume</span>
               </a>
             </div>
           </div>
 
-          <form class="panel contact-form" data-reveal="right">
-            <h3>Send a message</h3>
-            <label>
-              <span>Name</span>
-              <input type="text" name="name" placeholder="Your name" required />
-            </label>
-            <label>
-              <span>Email</span>
-              <input type="email" name="email" placeholder="your@email.com" required />
-            </label>
-            <label>
-              <span>Message</span>
-              <textarea
-                name="message"
-                rows="5"
-                placeholder="Tell me about your project or opportunity"
-                required
-              ></textarea>
-            </label>
-            <button class="button button-primary contact-submit" type="submit">Send Message</button>
-            <p class="form-status" aria-live="polite"></p>
-          </form>
+          <div class="contact-socials" aria-label="Social links">
+            <a
+              href="https://www.linkedin.com/in/sushmitha-bungatavula-664964173/"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="LinkedIn"
+            >
+              <img src="./icons/linkedin.svg" alt="LinkedIn" />
+            </a>
+            <a
+              href="https://github.com/sushmithabungatavula"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="GitHub"
+            >
+              <img src="./icons/github.svg" alt="GitHub" />
+            </a>
+            <a href="mailto:sushmithabungatavula07@gmail.com" aria-label="Gmail">
+              <img src="./icons/mail.svg" alt="Gmail" />
+            </a>
+          </div>
         </div>
       </section>
     </main>

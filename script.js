@@ -38,6 +38,24 @@ if (themeToggle) {
   });
 }
 
+const words = Array.from(document.querySelectorAll(".word"));
+
+if (words.length && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  let current = 0;
+
+  window.setInterval(() => {
+    const currentWord = words[current];
+    currentWord.classList.remove("active");
+    currentWord.classList.add("exit");
+
+    current = (current + 1) % words.length;
+
+    const nextWord = words[current];
+    nextWord.classList.remove("exit");
+    nextWord.classList.add("active");
+  }, 2200);
+}
+
 const setActiveLink = (id) => {
   navLinks.forEach((link) => {
     link.classList.toggle("is-active", link.getAttribute("href") === `#${id}`);
@@ -51,6 +69,9 @@ navLinks.forEach((link) => {
     if (!target) return;
 
     event.preventDefault();
+    if (href) {
+      setActiveLink(href.replace("#", ""));
+    }
     const headerHeight = document.querySelector(".site-header")?.offsetHeight || 0;
     const top = window.scrollY + target.getBoundingClientRect().top - headerHeight - 14;
 
@@ -105,37 +126,7 @@ if (revealItems.length && "IntersectionObserver" in window) {
   revealItems.forEach((item) => item.classList.add("is-visible"));
 }
 
-const contactForm = document.querySelector(".contact-form");
 const cursorGlow = document.querySelector(".cursor-glow");
-
-if (contactForm) {
-  const status = contactForm.querySelector(".form-status");
-  contactForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-
-    const formData = new FormData(contactForm);
-    const name = String(formData.get("name") || "").trim();
-    const email = String(formData.get("email") || "").trim();
-    const message = String(formData.get("message") || "").trim();
-
-    if (!name || !email || !message) {
-      if (status) status.textContent = "Please fill out all fields before sending.";
-      return;
-    }
-
-    const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    if (!emailValid) {
-      if (status) status.textContent = "Please enter a valid email address.";
-      return;
-    }
-
-    const subject = encodeURIComponent(`Portfolio inquiry from ${name || "Website visitor"}`);
-    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
-
-    if (status) status.textContent = "Opening your mail app with the message ready to send.";
-    window.location.href = `mailto:sushmithabungatavula07@gmail.com?subject=${subject}&body=${body}`;
-  });
-}
 
 if (cursorGlow && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
   window.addEventListener("pointermove", (event) => {
